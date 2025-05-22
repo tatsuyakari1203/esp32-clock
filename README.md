@@ -1,6 +1,6 @@
 # ESP32 NTP Clock with LVGL and DHT11 Sensor
 
-An ESP32-based clock that displays time synchronized via NTP, along with temperature and humidity from a DHT11 sensor, on a TFT display using the LVGL library.
+An ESP32-based clock that displays time synchronized via NTP, along with temperature and humidity from a DHT11 sensor, on a TFT display using the LVGL library. This project is specifically tailored for the popular **ESP32-2432S028R** development board (often referred to as the "Cheap Yellow Display" or CYD).
 
 ![ESP32 Clock Interface](screenshot.jpg)
 
@@ -55,10 +55,14 @@ This project implements a feature-rich digital clock on an ESP32 microcontroller
 
 ## 3. Hardware Requirements
 
-*   **ESP32 Development Board**: Any ESP32 board should work (e.g., ESP32-DevKitC).
-*   **TFT Display**: An SPI-based TFT display (e.g., ILI9341 based, 240x320 resolution) with touch capability (e.g., XPT2046).
+*   **ESP32 Development Board**: This project is designed for the **ESP32-2432S028R** (Cheap Yellow Display/CYD). This board integrates:
+    *   An ESP32-WROOM-32 module.
+    *   A 2.8-inch TFT LCD (240x320 resolution) typically using an **ILI9341 driver**.
+    *   A resistive touchscreen, commonly with an **XPT2046 controller**.
+    *   An SD card slot (not used in this project).
+    *   An RGB LED (not used in this project).
 *   **DHT11 Temperature and Humidity Sensor**.
-*   **Appropriate Wiring**: Ensure correct connections between the ESP32, TFT display, and DHT11 sensor according to their datasheets and the pin configurations in the code.
+*   **Appropriate Wiring**: For the DHT11 sensor, connect its data pin to the GPIO specified in the configuration (default GPIO27), VCC to 3.3V, and GND to ground. The display and touch are pre-wired on the ESP32-2432S028R board.
 
 ## 4. Prerequisites
 
@@ -80,7 +84,7 @@ The project is built using the Arduino framework for ESP32. PlatformIO will auto
 *   `std::vector`, `std::stdarg`: Standard C++ libraries.
 
 **Important:**
-*   **TFT_eSPI Configuration**: You will need to configure `TFT_eSPI` by creating/editing a `User_Setup.h` file within the `TFT_eSPI` library folder (usually in `.pio/libdeps/<env_name>/TFT_eSPI/`). Specify your display driver (e.g., `ILI9341_DRIVER`) and ESP32 pin connections.
+*   **TFT_eSPI Configuration**: You will need to configure `TFT_eSPI` by creating/editing a `User_Setup.h` file within the `TFT_eSPI` library folder (usually in `.pio/libdeps/<env_name>/TFT_eSPI/`). For the ESP32-2432S028R, specific `User_Setup.h` files are often available online (e.g., from projects like the one by witnessmenow on GitHub or RandomNerdTutorials). These pre-configured files correctly define the ILI9341 driver and the specific SPI pins used by the board for the display and the XPT2046 touch controller.
 *   **LVGL Configuration**: LVGL is typically configured via an `lv_conf.h` file. This project's `src/lv_conf.h` should be used by LVGL. Ensure it is correctly picked up by the LVGL library, often by placing it in the LVGL library's root directory or by including it appropriately. PlatformIO library management settings might influence this.
 
 ## 6. Configuration
@@ -112,8 +116,8 @@ constexpr int SCREEN_HEIGHT = 320;
     *   `SCREEN_WIDTH`: Default is 240 pixels.
     *   `SCREEN_HEIGHT`: Default is 320 pixels.
 *   **DHT Sensor**:
-    *   `DHTPIN`: GPIO pin connected to the DHT11 sensor's data line.
-    *   `DHTTYPE`: Sensor type (e.g., `DHT11`, `DHT22`).
+    *   `DHTPIN`: GPIO pin connected to the DHT11 sensor's data line (default: `27` on ESP32-2432S028R).
+    *   `DHTTYPE`: Sensor type (default: `DHT11`).
     *   `DHT_READ_INTERVAL_MS`: Interval for reading sensor data.
 *   **LVGL Tick Period**:
     *   `LVGL_TICK_PERIOD_MS`: Defines how often LVGL's internal ticker is called.
