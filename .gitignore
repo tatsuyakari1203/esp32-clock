@@ -1,0 +1,35 @@
+# PlatformIO specific files
+.pio/
+
+# VSCode specific files (keeping existing user preferences)
+.vscode/.browse.c_cpp.db*
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch/
+.vscode/settings.json # Often user-specific
+.vscode/tasks.json # Can be user-specific
+
+# Other common files to ignore
+*.bak
+*.tmp
+
+# Executables or binary files (if any, adjust as needed)
+*.elf
+*.bin
+
+# Operating System generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+dehydrated_kernels/
+
+# Build files (if not covered by .pio)
+build/
+*.o
+*.d
+
+# Local configuration (if any, e.g. for secrets not to be committed)
+# local_config.h 
