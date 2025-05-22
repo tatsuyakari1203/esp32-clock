@@ -2,6 +2,8 @@
 
 An ESP32-based clock that displays time synchronized via NTP, along with temperature and humidity from a DHT11 sensor, on a TFT display using the LVGL library.
 
+![ESP32 Clock Interface](screenshot.jpg)
+
 ## Table of Contents
 
 - [ESP32 NTP Clock with LVGL and DHT11 Sensor](#esp32-ntp-clock-with-lvgl-and-dht11-sensor)
